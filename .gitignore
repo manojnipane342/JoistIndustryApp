@@ -1,0 +1,6 @@
+/PickAny/obj
+/PickAny/bin
+/packages
+/*.sublime-*
+.vs/
+packages/
