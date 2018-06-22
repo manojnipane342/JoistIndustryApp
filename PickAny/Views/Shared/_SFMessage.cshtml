@@ -1,0 +1,46 @@
+﻿@if (TempData["fmsg"] != null)
+{
+    <div class="alert alert-danger  no-print">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong><i class="fa fa-remove"></i> !</strong> @TempData["fmsg"]
+    </div>
+}
+@if (TempData["smsg"] != null)
+{
+    <div class="alert alert-success no-print">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong><i class="fa fa-check"></i> !</strong> @TempData["smsg"]
+    </div>
+}
+@if (TempData["wmsg"] != null)
+{
+    <div class="alert alert-warning no-print">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong>Ohh hoo...!</strong> @TempData["wmsg"]
+    </div>
+}
+@if (TempData["imsg"] != null)
+{
+    <div class="alert alert-info no-print">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong>Okey...! </strong> @TempData["imsg"]
+    </div>
+}
+@if (TempData["lmsg"] != null)
+{
+    <div class="alert alert-success no-print">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong><i class="fa fa-check"></i> </strong> @TempData["lmsg"]
+    </div>
+}
+
+    @* <script>
+        $(document).ready(function () {
+            if ("@TempData["smsg"]" != "") {
+                       swal({ title: "Success!", type: "success", text: "@TempData["smsg"]" });
+                   }
+                   if ("@TempData["fmsg"]" != "") {
+                       swal({ title: "Error!", type: "error", text: "@TempData["fmsg"]" });
+                   }
+               });
+           </script>*@

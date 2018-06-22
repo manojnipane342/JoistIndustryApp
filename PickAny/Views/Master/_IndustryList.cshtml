@@ -1,0 +1,79 @@
+﻿@model List<PickAny_.Model.IndustryMaster>
+
+@using (Html.BeginForm("updateindustry", "master", FormMethod.Post, new { @id = "Form", @class = "form-horizontal" }))
+{
+
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add Industry</h5>
+                </div>
+                <div class="modal-body">
+                    <table width="100%">
+                        <tr>
+                            <td><label for="Title">Industry Name*</label></td>
+                            <td>
+                                @Html.Hidden("IndustryId")
+                                @Html.TextBox("IndustryName", "", new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessage("IndustryName")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="Title">IsActive</label></td>
+                            <td>
+                                @Html.CheckBox("IsActive", "")
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="save" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<br />
+
+<table class="table table-bordered data-table" id="example">
+    <thead>
+        <tr>
+            <th>Sr No.</th>
+            <th>Industry Name</th>
+            <th>IsActive</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int srno = 0;}
+        @foreach (var u in Model)
+            {
+                srno++;
+            <tr>
+                <td>@srno</td>
+                <td>@u.Name</td>
+                <td>@u.IsActive</td>
+                <td>
+                    <button class="btn btn-xs btn-primary edit" type="button" onclick="edit(@u.Id)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button class="btn btn-xs btn-danger delete" type="button" onclick="location.href='@Url.Action("deleteindustry","master",new { id =@u.Id})'" ><i class="glyphicon glyphicon-remove"></i></button>
+                    @*<a href="@Url.Action("DeleteIndustry","master",new { id=u.Id})">content</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    var edit = function (Id) {
+        var url = "/Master/GetIndustryById?id=" + Id;
+        $.getJSON(url, function (data) {
+            $("#IndustryId").val(data.Id);
+            $("#IndustryName").val(data.Name);
+        });
+
+        $("#exampleModal1").modal("show");
+    }
+</script>

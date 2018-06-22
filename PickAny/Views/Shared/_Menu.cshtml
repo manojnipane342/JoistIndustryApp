@@ -1,0 +1,8 @@
+﻿<!-- sidebar menu: : style can be found in sidebar.less -->
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        var role = Roles.GetRolesForUser()[0];
+        @Html.Partial("_" + role + "Menu")
+    }
+}

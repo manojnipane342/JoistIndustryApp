@@ -1,0 +1,12 @@
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\PickAny_.Logic.dll.config
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\PickAny_.Logic.dll
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\PickAny_.Logic.pdb
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\EntityFramework.dll
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\EntityFramework.SqlServer.dll
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\PickAny_.Model.dll
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\PickAny_.Model.pdb
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\EntityFramework.xml
+F:\MyProject\PickAny\PickAny_.Logic\bin\Debug\EntityFramework.SqlServer.xml
+F:\MyProject\PickAny\PickAny_.Logic\obj\Debug\PickAny_.Logic.csprojResolveAssemblyReference.cache
+F:\MyProject\PickAny\PickAny_.Logic\obj\Debug\PickAny_.Logic.dll
+F:\MyProject\PickAny\PickAny_.Logic\obj\Debug\PickAny_.Logic.pdb

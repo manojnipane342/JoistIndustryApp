@@ -1,0 +1,5 @@
+F:\MyProject\PickAny\PickAny_.Model\bin\Debug\PickAny_.Model.dll
+F:\MyProject\PickAny\PickAny_.Model\bin\Debug\PickAny_.Model.pdb
+F:\MyProject\PickAny\PickAny_.Model\obj\Debug\PickAny_.Model.dll
+F:\MyProject\PickAny\PickAny_.Model\obj\Debug\PickAny_.Model.pdb
+F:\MyProject\PickAny\PickAny_.Model\obj\Debug\PickAny_.Model.csprojResolveAssemblyReference.cache
