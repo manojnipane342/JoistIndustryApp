@@ -21,11 +21,11 @@ namespace PickAny_.Logic.Service
 
                 if (industrymaster.Id == 0)
                 {
-                    var _industryExists = dbcontext.Industries.Where(c => c.Nane == industrymaster.Name).FirstOrDefault();
+                    var _industryExists = dbcontext.Industries.Where(c => c.Name == industrymaster.Name).FirstOrDefault();
                     if (_industryExists == null)
                     {
                         Industry IndustryMaster = new Logic.Industry();
-                        IndustryMaster.Nane = industrymaster.Name;
+                        IndustryMaster.Name = industrymaster.Name;
                         IndustryMaster.IsActive = industrymaster.IsActive;
 
                         dbcontext.Industries.Add(IndustryMaster);
@@ -45,7 +45,7 @@ namespace PickAny_.Logic.Service
                     if (_industryExists != null)
                     {
 
-                        _industryExists.Nane = industrymaster.Name;
+                        _industryExists.Name = industrymaster.Name;
                         dbcontext.SaveChanges();
                         _Result.IsSuccess = true;
                     }
@@ -110,7 +110,7 @@ namespace PickAny_.Logic.Service
                 {
 
                     Id = c.Id,
-                    Name = c.Nane,
+                    Name = c.Name,
                     IsActive = c.IsActive ?? false
 
                 }).ToList();
@@ -147,7 +147,7 @@ namespace PickAny_.Logic.Service
                 {
 
                     Id = c.Id,
-                    Name = c.Nane,
+                    Name = c.Name,
                     IsActive=c.IsActive ?? false
 
                 }).FirstOrDefault();
