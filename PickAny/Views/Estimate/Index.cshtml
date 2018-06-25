@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Estimates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<label>&nbsp;</label>
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <div id="overlay">
+        <div style="margin-top: 20%;margin-left: 50%;">
+            <img src="~/Images/301.gif" height="80" width="80" />
+        </div>
+    </div>
+    <div class="row">
+        <!-- begin col-8 -->
+        <div class="col-md-12">
+            <div class="panel panel-inverse" @*data-sortable-id="index-1"*@>
+               
+                <div class="panel-body">
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("industry", "master", FormMethod.Post, new { @id = "Form", @class = "form-horizontal" }))
+                            {
+                                if (TempData["industry"] != null)
+                                {
+                                    <br />
+                                    if (TempData["industry"].ToString().ToLower() == "true")
+                                    {
+                                        <div class="alert alert-success">
+                                            <button class="close" data-dismiss="alert">×</button>
+                                            <strong>Success!</strong> Industry Added Successfully !
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-error">
+                                            <button class="close" data-dismiss="alert">×</button>
+                                            <strong>Error!</strong> Industry Already Exists!
+                                        </div>
+                                    }
+                                }
+                                <div> 
+                                    <button type="button" onclick="location.href='@Url.Action("NewEstimate", "Estimate")'" class="btn btn-info btn-large" data-toggle="modal" data-target="#exampleModal">
+                                        New Estimate
+                                    </button>
+                                </div>
+                                    <!-- Modal -->
+                                
+                            }
+                            <div class="widget-box">
+                                @*@{Html.RenderAction("IndustryList");}*@
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+    #overlay {
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(255,255,255,0.5);
+        transition: 1s 0.4s;
+    }
+</style>
+@Scripts.Render("~/AdminLTE/plugins/jquery/js")
+
+@Scripts.Render("~/Assets/common")

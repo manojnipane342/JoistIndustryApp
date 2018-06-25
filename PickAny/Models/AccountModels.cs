@@ -82,10 +82,16 @@ namespace PickAny.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Id")]
+        public string Email { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public int IndustryId { get; set; }
     }
 
     public class ExternalLogin
@@ -94,4 +100,5 @@ namespace PickAny.Models
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
     }
+
 }

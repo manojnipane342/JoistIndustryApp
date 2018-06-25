@@ -1,0 +1,288 @@
+﻿@{
+    ViewBag.Title = "NewEstimate";
+}
+@Styles.Render("~/Content/Common")
+<label>&nbsp;</label>
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <div id="overlay">
+        <div style="margin-top: 20%;margin-left: 50%;">
+            <img src="~/Images/301.gif" height="80" width="80" />
+        </div>
+    </div>
+    <div class="row">
+        <!-- begin col-8 -->
+        <div class="col-md-12">
+            <div class="panel panel-inverse" @*data-sortable-id="index-1"*@>
+
+                <div class="panel-body">
+                    <div class="panel panel-inverse">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("industry", "master", FormMethod.Post, new { @id = "Form", @class = "form-horizontal" }))
+                            {
+                                if (TempData["industry"] != null)
+                                {
+                            <br />
+                                    if (TempData["industry"].ToString().ToLower() == "true")
+                                    {
+                            <div class="alert alert-success">
+                                <button class="close" data-dismiss="alert">×</button>
+                                <strong>Success!</strong> Estimate Added Successfully !
+                            </div>
+                                    }
+                                    else
+                                    {
+                            <div class="alert alert-error">
+                                <button class="close" data-dismiss="alert">×</button>
+                                <strong>Error!</strong> Estimate Already Exists!
+                            </div>
+                                    }
+                                }
+
+                                    <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">New Client</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table width="100%" id="myTable">
+
+                                                <h4>Basic Information</h4>
+                                                <hr />
+                                                <tr>
+                                                    <td><label for="name" class="requiredLabel">Name</label></td>
+                                                    <td>
+                                                        <input type="text" id="firstName" placeholder="Full Name" class="form-control required" autofocus>
+                                                        <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td><label for="email" class="requiredLabel">Email</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="email" placeholder="Email" class="form-control required">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="phone" class="requiredLabel">Phone (Mobile)</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="phone" placeholder="Phone (Mobile)" class="form-control required">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="phone">Phone (Other)</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="other" placeholder="Phone (Other)" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr></tr>
+                                                <tr>
+                                                    <td>
+                                                        <h4>Additional Information</h4>
+                                                        <hr />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="add1" class="requiredLabel">Address</label></td>
+                                                    <td>
+                                                        <input type="text" id="add1" placeholder="Address" class="form-control required">
+                                                        <span class="help-block"></span>
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td><label for="add2">Address 2</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="add2" placeholder="Address2" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="city" class="requiredLabel">City</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="city" placeholder="City" class="form-control required">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="state" class="requiredLabel"> State</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="state" placeholder="State" class="form-control required">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="zip">Zip / Postal Code</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" id="zip" placeholder="Zip / Postal Code" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="prnotes">Private Notes</label></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <textarea id="notes" placeholder="Your notes" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" id="saveClient" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-1">
+                                        <button class="btn btn-default btn-sm pull-right">Cancel</button>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <button class="btn btn-primary btn-sm pull-right">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                                    <!-- Modal -->
+
+                            }
+                            <div class="widget-box">
+                                <button type="button" class="btn btn-info btn-large" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="glyphicon glyphicon-plus-sign"></i>  Add Clients
+                                </button>
+
+                                <div class="row" id="clientLabeled">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <p class="client-name ellipsize-text" id="cname"></p><p></p>
+                                            <p class="ellipsize-text" id="add12"></p>
+                                            <p class="ellipsize-text" id="regionall"></p>
+                                            <p class="ellipsize-text" id="phonem"></p>
+                                            <p class="ellipsize-text" id="phoneo"></p>
+                                            <p class="ellipsize-text" id="pemail"></p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div role="form" id="estimateSide" style="float: right;width: 500px;">
+                                                <div class="form-group">
+                                                    <label>Estimate#</label>
+                                                    <input type="number" class="form-control" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Date issued</label>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>PO Number</label>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Rate</th> 
+                                            <th>Quantity</th>
+                                            <th>Tax</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" size="80" class="form-control" placeholder="Name"/></td>
+                                            <td><input type="text" class="form-control" value="0.00"/></td>
+                                            <td><input type="text" class="form-control" value="0"/></td>
+                                            <td><input type="text" class="form-control" placeholder="Tax"/></td>
+                                            <td><input type="text" class="form-control" value="0.00"/></td>
+                                            <td rowspan="2"><button class="btn btn-xs btn-danger"><span class="fa fa-minus-circle"></span></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5"><input type="text" class="form-control" placeholder="Description" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button class="btn btn-primary btn-xs"><span class="fa fa-plus-circle"></span> &nbsp; Add Line Item</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-6">
+                                <div role="form" id="estimateSide" style="float: right;width: 500px;">
+                                    <div class="form-group">
+                                        <label>Subtotal</label>
+                                        <input type="number" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Markup</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Discount</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #overlay {
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(255,255,255,0.5);
+        transition: 1s 0.4s;
+    }
+</style>
+@Scripts.Render("~/AdminLTE/plugins/jquery/js")
+@Scripts.Render("~/Assets/common")
+@Scripts.Render("~/Assets/Estimate")
+

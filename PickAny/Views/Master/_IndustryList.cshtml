@@ -41,6 +41,7 @@
 <table class="table table-bordered data-table" id="example">
     <thead>
         <tr>
+            
             <th>Sr No.</th>
             <th>Industry Name</th>
             <th>IsActive</th>
@@ -65,8 +66,11 @@
         }
     </tbody>
 </table>
-
+@Scripts.Render("~/AdminLTE/plugins/jquery/js")
 <script>
+    $(document).ready(function(){
+        $("#overlay").hide();
+    });
     var edit = function (Id) {
         var url = "/Master/GetIndustryById?id=" + Id;
         $.getJSON(url, function (data) {

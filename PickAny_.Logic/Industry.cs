@@ -15,7 +15,7 @@ namespace PickAny_.Logic
     public partial class Industry
     {
         public int Id { get; set; }
-        public string Nane { get; set; }
+        public string Name { get; set; }
         public Nullable<bool> IsActive { get; set; }
     }
 }

@@ -32,6 +32,11 @@ namespace PickAny_.Logic
         public Nullable<int> CreatedById { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public bool IsDeactive { get; set; }
+        public Nullable<int> IndustryId { get; set; }
+        public Nullable<int> RoleId { get; set; }
+        public string Email { get; set; }
+        public bool EmailVerified { get; set; }
+        public string ActivationCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProfile> UserProfile1 { get; set; }

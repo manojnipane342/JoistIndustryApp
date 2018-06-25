@@ -35,7 +35,8 @@ namespace PickAny.Infrastructure
             //Put Your Binding Contents Here...
 
             //ninjectKernel.Bind<IMaster>().To<EFMaster>();
-            ninjectKernel.Bind<IIndustryMaster>().To<IndustryMasterServices>();    
+            ninjectKernel.Bind<IIndustryMaster>().To<IndustryMasterServices>();
+            ninjectKernel.Bind<IUserProfile>().To<UserProfileService>();
         }
     }
 

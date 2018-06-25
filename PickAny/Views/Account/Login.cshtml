@@ -1,18 +1,88 @@
-﻿@{
+﻿@model PickAny.Models.LoginModel
+@{
     ViewBag.Title = ":: Pick Any ::";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = null;
 }
 
-@*<div class="login-header">
-    <div class="brand">
-        <span style="display: block; margin: 0px auto; text-align: center;"><img src="~/img/logo.png" height="100" width="200" /></span>
-    </div>
-    <div class="icon">
-        <i class="fa fa-sign-in"></i>
-    </div>
-</div>*@
+@Html.Partial("_SFMessage")
 
-<div class="login-content">
-    @Html.Partial("_SFMessage")
-    @Html.Partial("_Login")
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>:: JoistApp ::</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link href="~/plugins/adminlte/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/plugins/adminlte/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/plugins/adminlte/plugins/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link href="~/plugins/adminlte/dist/css/admin-lte.min.css" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="~/plugins/adminlte/plugins/icheck/css/sqare/blue.css" rel="stylesheet" />
+
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>JoistApp</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(c => c.UserName, new { @class = "form-control uname", @required = "required",@placeholder="Email" })
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @Html.ValidationMessageFor(c => c.UserName)
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(c => c.Password, new { @class = "form-control pass", @required = "required", @type = "password", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(c => c.Password)
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                RememberMe
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            }
+
+
+            <a href="#">I forgot my password</a><br>
+            <a href="/Account/Register" class="text-center">Register a new membership</a>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery 3 -->
+    <script src="~/plugins/adminlte/plugins/jquery/js/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/plugins/adminlte/bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/plugins/adminlte/plugins/icheck/js/icheck.min.js"></script>
+
+    <script src="~/Assets/Login.js"></script>
+</body>
+</html>

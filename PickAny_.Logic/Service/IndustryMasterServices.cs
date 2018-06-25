@@ -11,6 +11,9 @@ namespace PickAny_.Logic.Service
     public class IndustryMasterServices : IIndustryMaster
     {
         private PickAnyLiveEntities dbcontext = new PickAnyLiveEntities();
+
+        
+
         public Result<Model.IndustryMaster> Save(Model.IndustryMaster industrymaster)
         {
             Result<PickAny_.Model.IndustryMaster> _Result = new Result<PickAny_.Model.IndustryMaster>();
@@ -24,6 +27,7 @@ namespace PickAny_.Logic.Service
                     var _industryExists = dbcontext.Industries.Where(c => c.Name == industrymaster.Name).FirstOrDefault();
                     if (_industryExists == null)
                     {
+                        
                         Industry IndustryMaster = new Logic.Industry();
                         IndustryMaster.Name = industrymaster.Name;
                         IndustryMaster.IsActive = industrymaster.IsActive;

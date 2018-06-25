@@ -3,3 +3,11 @@ F:\MyProject\PickAny\PickAny_.Model\bin\Debug\PickAny_.Model.pdb
 F:\MyProject\PickAny\PickAny_.Model\obj\Debug\PickAny_.Model.dll
 F:\MyProject\PickAny\PickAny_.Model\obj\Debug\PickAny_.Model.pdb
 F:\MyProject\PickAny\PickAny_.Model\obj\Debug\PickAny_.Model.csprojResolveAssemblyReference.cache
+C:\Users\Er.nipane\Desktop\JoistIndustryApp23_6\JoistIndustryApp\PickAny_.Model\bin\Debug\PickAny_.Model.dll
+C:\Users\Er.nipane\Desktop\JoistIndustryApp23_6\JoistIndustryApp\PickAny_.Model\bin\Debug\PickAny_.Model.pdb
+C:\Users\Er.nipane\Desktop\JoistIndustryApp23_6\JoistIndustryApp\PickAny_.Model\obj\Debug\PickAny_.Model.dll
+C:\Users\Er.nipane\Desktop\JoistIndustryApp23_6\JoistIndustryApp\PickAny_.Model\obj\Debug\PickAny_.Model.pdb
+F:\JoistIndustryApp\PickAny_.Model\bin\Debug\PickAny_.Model.dll
+F:\JoistIndustryApp\PickAny_.Model\bin\Debug\PickAny_.Model.pdb
+F:\JoistIndustryApp\PickAny_.Model\obj\Debug\PickAny_.Model.dll
+F:\JoistIndustryApp\PickAny_.Model\obj\Debug\PickAny_.Model.pdb

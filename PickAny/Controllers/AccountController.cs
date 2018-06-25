@@ -16,22 +16,93 @@ using DotNetOpenAuth.AspNet;
 using WebMatrix.WebData;
 using System.Collections.Generic;
 using PickAny.Filters;
+using PickAny_.Logic.Interface;
+using PickAny_.Model.UserProfiles;
+using PickAny.Helpers;
+using PickAny.Repository;
 
 namespace PickAny.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        //
-        // GET: /Account/Login
+        private IIndustryMaster _IIndustryMaster;
+        private IUserProfile _IUserProfile;
 
+        public AccountController(IIndustryMaster industry, IUserProfile userprofile)
+        {
+            _IIndustryMaster = industry;
+            _IUserProfile = userprofile;
+        }
+        #region -------------------------------------------------------------------- Methods---------------------------------------------
+        public void dropdown()
+        {
+            ViewBag.Industrylist = new SelectList(_IIndustryMaster.GetIndustryList().Data.Select(c => new { Id = c.Id, Name = c.Name }), "Id", "Name");
+
+        }
+
+        #endregion
+
+        #region ------------------------ Action ----------------------
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult CreateUsers(UserProfiles userProfile)
+        {
+            try
+            {
+                userProfile.EmailVerified = false;
+
+                userProfile.RoleId = 2;
+                if (WebSecurity.UserExists(userProfile.UserName))
+                {
+                    TempData["users"] = "false";
+                }
+                else
+                {
+                    if (userProfile.UserId == 0)
+                    {
+                        WebSecurity.CreateUserAndAccount(userProfile.UserName, userProfile.Pass,  new
+                        {
+                            userProfile.FullName,
+                            userProfile.UserName,
+                            userProfile.Pass,
+                            userProfile.Address,
+                            userProfile.Email,
+                            userProfile.EmailVerified,
+                            userProfile.Mobile,
+                            userProfile.IndustryId,
+                            userProfile.RoleId,
+                        });
+                        //Roles.AddUserToRole(userProfile.UserName,Convert.ToInt32(userProfile.RoleId).ToString());
+                        if (!string.IsNullOrEmpty(userProfile.Email))
+                        {
+                            bool isSentEmail = new UserRepository().SendActivationEmail(userProfile.Email);
+                            if (isSentEmail)
+                            {
+                                TempData["smsg"] = Messages.EMAIL_VERIFICATION_MESSAGE;
+                            }
+                        }
+                        TempData["users"] = "true";
+                        return RedirectToAction("login", "account");
+                    }
+                }
+            }
+            catch (MembershipCreateUserException e)
+            {
+                ModelState.AddModelError("", PickAny.Controllers.AccountController.ErrorCodeToString(e.StatusCode));
+            }
+            return View("Register");
+        }
+
+        #endregion
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
         [AllowAnonymous]
         public string AccountManagerSetup()
         {
@@ -93,8 +164,15 @@ namespace PickAny.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                TempData["smsg"] = "Login Successfully";
-                return RedirectToAction("Index", "Home");
+                if (new UserRepository().IsVerfiedEmail(model.UserName, model.Password))
+                {
+                    TempData["smsg"] = "Login Successfully";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    TempData["fmsg"] = "Seems your account is not email confirm with our system create new and try again";
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -106,11 +184,15 @@ namespace PickAny.Controllers
         //
         // POST: /Account/LogOff
 
-
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
+            var ctx = Request.GetOwinContext();
+            var auth = ctx.Authentication;
+            auth.SignOut();
+            Session.Clear();
+            Session.Abandon();
             return RedirectToAction("Login", "Account");
         }
 
@@ -120,6 +202,7 @@ namespace PickAny.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            dropdown();
             return View();
         }
 
@@ -137,19 +220,45 @@ namespace PickAny.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    //if (!string.IsNullOrEmpty(model.Email))
+                    //{
+
+                    //    bool isSentEmail = new UserRepository().SendActivationEmail(UserId, model.UserName);
+                    //    if (isSentEmail)
+                    //    {
+                    //        TempData["smsg"] = Messages.EMAIL_VERIFICATION_MESSAGE;
+                    //    }
+                    //}
+                    //WebSecurity.Login(model.UserName, model.Password);
+                    //return RedirectToAction("Index", "Home");
+
                 }
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
-
+            dropdown();
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ActionResult EmailActivation(Guid activationCode)
+        {
+            //TempData["fmsg"] = "Invalid Activation code.";
+            if (activationCode != null)
+            {
+                //Guid activationCode = new Guid(RouteData.Values["id"].ToString());
+                PickAny_.Logic.UserProfile user = new UserRepository().CheckActivationCode(activationCode);
+                if (user != null)
+                {
+                    WebSecurity.Login(user.UserName, user.Pass);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
         //
         // POST: /Account/Disassociate
 
